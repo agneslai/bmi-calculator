@@ -1,7 +1,6 @@
-import Limitation from "./Limitation"
+import Limitation from './Limitation';
 
-const SectionLimitations = () => {
-  return (
+const SectionLimitations = () => (
     <section className="py-[120px]">
       <div className='section-grid pb-[16px]'>
         <div className='col-span-5'>
@@ -31,7 +30,6 @@ const SectionLimitations = () => {
         </div>
       </div>
     </section>
-  )
-}
+  );
 
-export default SectionLimitations
+export default SectionLimitations;
