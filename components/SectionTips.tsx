@@ -24,7 +24,9 @@ const TIPS = [
 
 const SectionTips = () => {
   return (
-    <section className='section-grid section-padding'>
+    <section className='section-grid section-padding relative'>
+      <div className="absolute -top-[10px] -right-[100px] w-[1392px] h-[400px] bg-gradient-to-br from-[#D6FCFE00] to-[#D6E6FE] -z-50 rounded-[35px]" />
+
       {TIPS.map((tip) => (
         <div className='col-span-4'>
           <Tip image={tip.image} imageAlt={tip.alt} title={tip.title} desc={tip.desc} />

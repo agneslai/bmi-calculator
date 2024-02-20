@@ -6,7 +6,8 @@ import SectionTips from "@/components/SectionTips";
 
 export default function Home() {
   return (
-    <main className="min-h-screen max-w-[1160px] p-8 flex flex-col mx-auto">
+    <main className="min-h-screen max-w-[1160px] flex flex-col mx-auto relative">
+      <div className="absolute right-[280px] w-[978px] h-[737px] bg-gradient-to-br from-[#D6FCFE00] to-[#D6E6FE] -z-50 rounded-br-[30px] rounded-bl-[30px]" />
       <Header />
       <SectionHero />
       <SectionIntro />

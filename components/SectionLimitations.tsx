@@ -2,7 +2,7 @@ import Limitation from "./Limitation"
 
 const SectionLimitations = () => {
   return (
-    <section className="section-padding">
+    <section className="py-[120px]">
       <div className='section-grid pb-[16px]'>
         <div className='col-span-5'>
           <div className="w-full">
