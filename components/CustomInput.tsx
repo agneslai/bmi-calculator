@@ -17,7 +17,7 @@ const CustomInput = ({ label, value, unit, onChange }: Props) => {
           value={value}
           onChange={onChange}
           name={label || unit}
-          className='w-full outline-none text-[24px] font-semibold'
+          className={`w-full outline-none text-[24px] font-semibol ${value === 0 ? 'text-grey' : 'text-dark-blue'}`}
           min={0}
         />
         <p className='text-blue font-semiBold text-[24px] -tracking-5'>{unit}</p>
