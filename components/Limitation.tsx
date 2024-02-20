@@ -9,7 +9,7 @@ interface Props {
 
 const Limitation = ({image, imageAlt, title, desc}: Props) => {
   return (
-    <div className="flex flex-col gap-y-[16px] shadow-limitation p-[32px] rounded-[16px]">
+    <div className="flex flex-col gap-y-[16px] shadow-default p-[32px] rounded-[16px]">
       <div className="flex gap-x-[16px]">
         <Image src={image} alt={imageAlt} width={32} height={32}/>
         <p className="text-dark-blue text-[20px] font-semibold -tracking-5">{title}</p>

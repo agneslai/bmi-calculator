@@ -1,5 +1,7 @@
 "use client"
 
+import Calculator from "./Calculator"
+
 const SectionHero = () => {
   return (
     <section className="section-grid section-padding">
@@ -13,14 +15,7 @@ const SectionHero = () => {
 
       <div className="col-start-7 col-span-6">
         <div className="flex flex-col justify-center items-center h-full w-full">
-          <div className="w-full bg-blue-100 rounded-[16px] p-[32px]">
-            <p>Enter Your details below</p>
-            <p>Enter Your details below</p>
-            <p>Enter Your details below</p>
-            <p>Enter Your details below</p>
-            <p>Enter Your details below</p>
-          </div>
-
+          <Calculator />
         </div>
       </div>
 

@@ -17,6 +17,8 @@ const config: Config = {
       colors: {
         "dark-blue": "#253347",
         "blue-grey": "#5E6E85",
+        "blue": '#345FF6',
+        "grey": "#D8E2E7",
       },
       letterSpacing: {
         '-5': '-0.05em',
@@ -26,7 +28,7 @@ const config: Config = {
         '150': '150%',
       },
       boxShadow: {
-        'limitation': '16px 32px 26px #8FAECF40',
+        default: '16px 32px 56px #8FAECF40',
       }
     },
   },
