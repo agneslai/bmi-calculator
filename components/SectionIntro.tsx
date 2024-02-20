@@ -1,10 +1,11 @@
+import prefix from '@/utils/prefix';
 import Image from 'next/image';
 
 const SectionIntro = () => (
   <section className='section-grid section-padding'>
     <div className='col-span-6'>
       <div className="w-full h-[533px]">
-        <Image src="/image-man-eating.svg" alt="man eating" width={0} height={0} className="w-full h-full" />
+        <Image src={`${prefix}/image-man-eating.svg`} alt="man eating" width={0} height={0} className="w-full h-full" />
       </div>
     </div>
     <div className='col-start-8 col-span-5'>
