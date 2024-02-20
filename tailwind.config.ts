@@ -6,6 +6,7 @@ const config: Config = {
     "./components/**/*.{js,ts,jsx,tsx,mdx}",
     "./app/**/*.{js,ts,jsx,tsx,mdx}",
   ],
+  mode: "jit",
   theme: {
     extend: {
       backgroundImage: {
@@ -13,6 +14,20 @@ const config: Config = {
         "gradient-conic":
           "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
       },
+      colors: {
+        "dark-blue": "#253347",
+        "blue-grey": "#5E6E85",
+      },
+      letterSpacing: {
+        '-5': '-0.05em',
+      },
+      lineHeight: {
+        '110': '110%',
+        '150': '150%',
+      },
+      boxShadow: {
+        'limitation': '16px 32px 26px #8FAECF40',
+      }
     },
   },
   plugins: [],
