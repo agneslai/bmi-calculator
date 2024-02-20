@@ -27,3 +27,29 @@ body {
 .section-padding {
   @apply py-[40px]
 }
+
+.custom-radio input {
+  border: 1px solid #D8E2E7;
+  border-radius: 9999px;
+  width: 30px;
+  height: 30px;
+  cursor: pointer;
+}
+
+.custom-radio input:checked {
+  border: none;
+  background-color: #345FF6;
+  width: 15px;
+  height: 15px;
+  outline: 15px solid #345FF626;
+  outline-offset: -15px;
+  margin: 0 7.5px;
+}
+
+.custom-radio input:hover {
+  border: 1px solid #345FF6;
+}
+
+.calculator__result {
+  border-radius: 160px 999px 999px 160px;
+}

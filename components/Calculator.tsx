@@ -1,7 +1,8 @@
 "use client"
 
 import { useEffect, useState } from "react";
-import CustomInput from "./Input";
+import CustomInput from "./CustomInput";
+import CustomRadio from "./CustomRadio";
 import { calculateUseImperial, calculateUseMetric, getRange } from "@/utils/BMICalculator";
 
 interface IResult {
@@ -10,7 +11,7 @@ interface IResult {
 }
 
 const Calculator = () => {
-  const [mode, setMode] = useState<'metric' | 'imperial'>('imperial');
+  const [mode, setMode] = useState<'metric' | 'imperial' | string>('imperial');
 
   const [height, setHeight] = useState<number>(0);
   const [weight, setWeight] = useState<number>(0);
@@ -20,7 +21,7 @@ const Calculator = () => {
   const [sts, setSts] = useState<number>(0);
   const [lbs, setLbs] = useState<number>(0);
 
-  const [result, setResult] = useState<IResult>({bmi: 0, range: "Healthy weight"});
+  const [result, setResult] = useState<IResult>({ bmi: 0, range: "Healthy weight" });
 
   useEffect(() => {
     let bmi = 0;
@@ -30,22 +31,20 @@ const Calculator = () => {
       bmi = calculateUseImperial(sts, lbs, feet, inches);
     }
     const range = getRange(bmi);
-    setResult({bmi:parseFloat(bmi.toFixed(1)), range});
+    setResult({ bmi: parseFloat(bmi.toFixed(1)), range });
   }, [weight, height, sts, lbs, feet, inches])
+
+  useEffect(() => {
+    setResult({ bmi: 0, range: "Healthy weight" });
+  }, [mode])
 
   return (
     <div className="w-full flex flex-col gap-y-[32px] bg-white p-[32px] rounded-[16px] shadow-default">
       <p className="text-dark-blue font-semibold text-[24px] -tracking-5">Enter your details below</p>
 
       <div className="flex justify-between items-center gap-x-[24px]">
-        <div className="flex flex-1 gap-x-[18px]">
-          <input type="radio" name="metric" value="metric" id="metric" />
-          <label htmlFor="metric">Metric</label>
-        </div>
-        <div className="flex flex-1 gap-x-[18px]">
-          <input type="radio" name="Imperial" value="Imperial" id="Imperial" />
-          <label htmlFor="Imperial">Imperial</label>
-        </div>
+        <CustomRadio value="metric" checked={mode==="metric"} label="Metric" onChange={(e) => setMode(e.target.value)} onClick={(value) => setMode(value)} />
+        <CustomRadio value='imperial' checked={mode==='imperial'} label="Imperial" onChange={(e) => setMode(e.target.value)} onClick={(value) => setMode(value)} />
       </div>
 
       <div>
@@ -68,8 +67,8 @@ const Calculator = () => {
         }
       </div>
 
-      <div className="bg-gradient-to-r from-[#345FF6] to-[#587DFF] text-white p-[32px] rounded-tr-full rounded-br-full rounded-tl-2xl rounded-bl-2xl overflow-hidden">
-        {result ?
+      <div className="calculator__result bg-gradient-to-r from-[#345FF6] to-[#587DFF] text-white p-[32px] overflow-hidden">
+        {result.bmi !== 0 ?
           <div className="flex justify-between items-center gap-x-[24px]">
             <div>
               <p className="text-[16px] font-semibold">Your BMI is...</p>
