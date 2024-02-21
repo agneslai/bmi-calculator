@@ -2,7 +2,7 @@ import Image from 'next/image';
 import prefix from '@/utils/prefix';
 
 const Header = () => (
-  <header className="flex items-center justify-center py-4 lg:py-8 lg:justify-start">
+  <header className="flex items-center justify-center py-4 lg:pt-8 lg:justify-start">
     <Image
       src={`${prefix}/logo.svg`}
       alt="logo"
