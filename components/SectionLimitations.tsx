@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import prefix from '@/utils/prefix';
 import Limitation from './Limitation';
 
@@ -18,7 +19,14 @@ const SectionLimitations = () => (
         desc="The development and body fat composition of girls and boys vary with age. Consequently, a child's age and gender are considered when evaluating their BMI." />
     </div>
 
-    <div className='md:col-span-6 lg:col-start-5 lg:col-span-4'>
+    <div className='relative md:col-span-6 lg:col-start-5 lg:col-span-4'>
+      <Image
+        src={`${prefix}/pattern-curved-line-right.svg`}
+        alt="curve line"
+        width={94}
+        height={122}
+        className='absolute -left-[230px] hidden -top-[13px] lg:block'
+      />
       <Limitation
         image={`${prefix}/icon-age.svg`}
         imageAlt="icon age"

@@ -22,7 +22,7 @@ body {
 }
 
 .section-padding {
-  @apply px-[24px] md:px-[40px] py-[50px] lg:px-0
+  @apply px-[24px] md:px-[40px] py-[60px] lg:px-0
 }
 
 .title {
@@ -43,7 +43,7 @@ body {
   @apply
   flex flex-col 
   md:grid md:grid-cols-12 md:gap-x-[32px]
-  py-[40px]
+  py-[60px]
 }
 
 .sectionTips {
@@ -52,6 +52,7 @@ body {
   flex flex-col 
   section-grid
   section-padding
+  lg:my-[50px]
   gap-y-[40px] lg:gap-y-[48px]
   bg-gradient-to-br from-[#D6FCFE00] to-[#D6E6FE]
   lg:bg-none
@@ -62,7 +63,7 @@ body {
   flex flex-col 
   md:grid md:grid-cols-12
   section-grid 
-  px-[24px] py-[50px] lg:py-[120px]
+  px-[24px] py-[60px] lg:py-[80px] lg:px-0
   gap-y-[16px]
   md:gap-y-[24px] md:gap-x-[15px]
   lg:gap-y-[16px] lg:gap-x-[32px]
@@ -82,7 +83,7 @@ body {
   @apply 
   text-dark-blue 
   text-[24px] font-semibold
-  text-start lg:text-center 
+  text-start
   -tracking-5
 }
 
