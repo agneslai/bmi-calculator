@@ -23,11 +23,11 @@ const TIPS = [
 ];
 
 const SectionTips = () => (
-    <section className='relative section-grid section-padding'>
+    <section className='sectionTips'>
       {/* <div className="absolute -top-[10px] -right-[100px] w-[1392px] h-[400px] bg-gradient-to-br from-[#D6FCFE00] to-[#D6E6FE] -z-50 rounded-[35px]" /> */}
 
       {TIPS.map((tip) => (
-        <div className='col-span-4'>
+        <div className='lg:col-span-4'>
           <Tip image={tip.image} imageAlt={tip.alt} title={tip.title} desc={tip.desc} />
         </div>
       ))}
