@@ -3,7 +3,7 @@
 import Calculator from '@/components/Calculator';
 
 const SectionHero = () => (
-  <section className="hero">
+  <section className="sectionHero">
     <div className="lg:col-span-5">
       <div className="flex flex-col">
         <h1 className="text-dark-blue title text-[48px] lg:text-[64px] lg:mt-[100px]">Body Mass Index Calculator</h1>
