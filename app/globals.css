@@ -63,8 +63,9 @@ body {
 
 .hero {
   @apply
-  flex flex-col items-center justify-center text-center gap-y-[24px] p-[24px]
-  lg:grid lg:grid-cols-12 lg:gap-x-[32px] lg:gap-y-0 lg:text-start lg:p-0
+  flex flex-col items-center justify-center text-center gap-y-[24px] 
+  p-[24px] lg:py-[40px] lg:px-0
+  lg:grid lg:grid-cols-12 lg:gap-x-[32px] lg:gap-y-0 lg:text-start
 }
 
 /* Calculator */
@@ -91,4 +92,13 @@ body {
   text-white 
   p-[32px]
   rounded-[16px] lg:rounded-result-container-lg
+}
+
+/* Section Intro */
+.sectionIntro {
+  @apply
+  flex flex-col 
+  gap-y-[48px] lg:gap-y-0
+  lg:grid lg:grid-cols-12 lg:gap-x-[32px] 
+  py-[40px] lg:px-0
 }
