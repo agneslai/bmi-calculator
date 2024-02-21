@@ -7,6 +7,10 @@ const calculateUseImperial = (sts: number, lbs: number, feet: number, inches: nu
 };
 
 const getRange = (bmi: number) => {
+  if (Number.isNaN(bmi)) {
+    return '';
+  }
+
   if (bmi < 18.5) {
     return 'Underweight';
   } if (bmi < 24.9) {
