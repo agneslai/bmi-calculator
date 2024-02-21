@@ -35,7 +35,6 @@ body {
   flex flex-col
   section-grid
   section-padding
-  items-center justify-center 
   text-center lg:text-start
   gap-y-[24px] lg:gap-y-0 
 }
