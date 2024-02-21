@@ -22,7 +22,7 @@ body {
 }
 
 .section-padding {
-  @apply px-[24px] py-[50px] lg:px-0
+  @apply px-[24px] md:px-[40px] py-[50px] lg:px-0
 }
 
 .title {
@@ -42,7 +42,7 @@ body {
 .sectionIntro {
   @apply
   flex flex-col 
-  section-grid
+  md:grid md:grid-cols-12 md:gap-x-[32px]
   py-[40px]
 }
 
@@ -59,10 +59,13 @@ body {
 
 .sectionLimitations {
   @apply 
-  flex flex-col
-  section-grid
+  flex flex-col 
+  md:grid md:grid-cols-12
+  section-grid 
   px-[24px] py-[50px] lg:py-[120px]
   gap-y-[16px]
+  md:gap-y-[24px] md:gap-x-[15px]
+  lg:gap-y-[16px] lg:gap-x-[32px]
 }
 
 /* Components Styles */
@@ -71,7 +74,7 @@ body {
   bg-white
   w-full flex flex-col 
   rounded-[16px] shadow-default
-  p-[24px] lg:p-[32px] 
+  p-[24px] md:p-[32px] 
   gap-y-[24px] lg:gap-y-[32px] 
 }
 
@@ -88,7 +91,7 @@ body {
   bg-gradient-to-r from-[#345FF6] to-[#587DFF] 
   text-white 
   p-[32px]
-  rounded-[16px] lg:rounded-result-container-lg
+  rounded-[16px] md:rounded-result-container-lg
 }
 
 .custom-radio input {
