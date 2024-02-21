@@ -49,10 +49,13 @@ body {
 
 .sectionTips {
   @apply
+  relative
   flex flex-col 
   section-grid
   section-padding
   gap-y-[40px] lg:gap-y-[48px]
+  bg-gradient-to-br from-[#D6FCFE00] to-[#D6E6FE]
+  lg:bg-none
 }
 
 .sectionLimitations {
@@ -118,4 +121,16 @@ body {
   rounded-br-[30px] rounded-bl-[30px]
   bg-gradient-to-br from-[#D6FCFE00] to-[#D6E6FE]
   -z-10
+}
+
+.sectionTips__overlay {
+  @apply
+  hidden lg:block
+  absolute
+  w-full h-[350px]
+  scale-x-125 
+  scale-y-105
+  bg-gradient-to-br from-[#D6FCFE00] to-[#D6E6FE] 
+  rounded-[35px]
+  -z-50
 }

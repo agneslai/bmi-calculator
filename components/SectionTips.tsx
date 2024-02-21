@@ -24,7 +24,7 @@ const TIPS = [
 
 const SectionTips = () => (
     <section className='sectionTips'>
-      {/* <div className="absolute -top-[10px] -right-[100px] w-[1392px] h-[400px] bg-gradient-to-br from-[#D6FCFE00] to-[#D6E6FE] -z-50 rounded-[35px]" /> */}
+      <div className="sectionTips__overlay" />
 
       {TIPS.map((tip) => (
         <div className='lg:col-span-4'>
