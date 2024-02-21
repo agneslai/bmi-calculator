@@ -11,7 +11,7 @@ interface IResult {
 }
 
 const Calculator = () => {
-  const [mode, setMode] = useState<'metric' | 'imperial' | string>('imperial');
+  const [mode, setMode] = useState<'metric' | 'imperial' | string>('metric');
 
   const [height, setHeight] = useState<number>(0);
   const [weight, setWeight] = useState<number>(0);
@@ -49,7 +49,7 @@ const Calculator = () => {
 
 
       {mode === 'metric' ?
-        <div className="flex flex-col gap-y-[16px] lg:flex-row lg:gap-[24px] justify-between items-center">
+        <div className="flex flex-col gap-y-[16px] md:flex-row md:gap-[24px] justify-between items-center">
           <CustomInput label="Height" value={height} onChange={(e) => setHeight(parseInt(e.target.value, 10))} unit="cm" />
           <CustomInput label="Weight" value={weight} onChange={(e) => setWeight(parseInt(e.target.value, 10))} unit="kg" />
         </div>
@@ -68,10 +68,10 @@ const Calculator = () => {
 
       <div className="calculator__result ">
         {result.bmi !== 0 ?
-          <div className="flex flex-col items-start lg:flex-row lg:justify-between lg:items-center gapy-y-[24px] lg:gap-x-[24px]">
+          <div className="flex flex-col items-start md:flex-row md:justify-between md:items-center gap-y-[24px] md:gap-x-[24px]">
             <div>
-              <p className="text-[16px] font-semibold mb-[8px] lg:m-0]">Your BMI is...</p>
-              <p className="text-[64px] title">{Number.isNaN(result.bmi)? '-' : result.bmi}</p>
+              <p className="text-[16px] font-semibold mb-[8px] md:m-0]">Your BMI is...</p>
+              <p className="text-[64px] font-semibold leading-110 -tracking-5">{Number.isNaN(result.bmi)? '-' : result.bmi}</p>
             </div>
             <p className="text-[14px] leading-150 text-start">Your BMI suggests you’re a {result.range}. Your ideal weight is between 63.3kgs - 85.2kgs.</p>
           </div>

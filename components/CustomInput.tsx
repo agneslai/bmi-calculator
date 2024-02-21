@@ -8,7 +8,7 @@ interface Props {
 }
 
 const CustomInput = ({ label, value, unit, onChange }: Props) => (
-  <label className='flex flex-col gap-y-[8px]' htmlFor={label}>
+  <label className='flex flex-col gap-y-[8px] w-full' htmlFor={label}>
     <span className='text-blue-grey text-[14px] text-start leading-150 min-h-[20px]'>{label}</span>
     <div className="flex justify-between items-center px-[24px] py-[20px] gap-x-[24px] rounded-[12px] border-grey border-[1px] focus-within:border-blue">
       <input
