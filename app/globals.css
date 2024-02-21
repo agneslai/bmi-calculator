@@ -107,3 +107,9 @@ body {
   lg:grid lg:grid-cols-12 lg:gap-x-[32px] 
   px-[24px] py-[40px] lg:px-0
 }
+
+.sectionLimitations__container {
+  @apply 
+  flex flex-col
+  lg:grid lg:grid-cols-12 lg:gap-x-[32px] gap-y-[16px]
+}
