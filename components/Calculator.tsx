@@ -39,42 +39,41 @@ const Calculator = () => {
   }, [mode]);
 
   return (
-    <div className="w-full flex flex-col gap-y-[32px] bg-white p-[32px] rounded-[16px] shadow-default">
-      <p className="text-dark-blue font-semibold text-[24px] -tracking-5">Enter your details below</p>
+    <div className="calculator">
+      <p className="calculator__title">Enter your details below</p>
 
       <div className="flex justify-between items-center gap-x-[24px]">
-        <CustomRadio value="metric" checked={mode==='metric'} label="Metric" onChange={(e) => setMode(e.target.value)} onClick={(value) => setMode(value)} />
-        <CustomRadio value='imperial' checked={mode==='imperial'} label="Imperial" onChange={(e) => setMode(e.target.value)} onClick={(value) => setMode(value)} />
+        <CustomRadio value="metric" checked={mode === 'metric'} label="Metric" onChange={(e) => setMode(e.target.value)} onClick={(value) => setMode(value)} />
+        <CustomRadio value='imperial' checked={mode === 'imperial'} label="Imperial" onChange={(e) => setMode(e.target.value)} onClick={(value) => setMode(value)} />
       </div>
 
-      <div>
-        {mode === 'metric' ?
-          <div className="flex gap-[24px] justify-between items-center">
-            <CustomInput label="Height" value={height} onChange={(e) => setHeight(parseInt(e.target.value, 10))} unit="cm" />
-            <CustomInput label="Weight" value={weight} onChange={(e) => setWeight(parseInt(e.target.value, 10))} unit="kg" />
-          </div>
-          :
-          <div className="flex flex-col gap-y-[24px]">
-            <div className="flex gap-[24px] justify-between items-center">
-              <CustomInput label="Height" value={feet} onChange={(e) => setFeet(parseInt(e.target.value, 10))} unit="ft" />
-              <CustomInput label="" value={inches} onChange={(e) => setInches(parseInt(e.target.value, 10))} unit="in" />
-            </div>
-            <div className="flex gap-[24px] justify-between items-center">
-              <CustomInput label="Weight" value={sts} onChange={(e) => setSts(parseInt(e.target.value, 10))} unit="st" />
-              <CustomInput label="" value={lbs} onChange={(e) => setLbs(parseInt(e.target.value, 10))} unit="lbs" />
-            </div>
-          </div>
-        }
-      </div>
 
-      <div className="calculator__result bg-gradient-to-r from-[#345FF6] to-[#587DFF] text-white p-[32px] overflow-hidden">
+      {mode === 'metric' ?
+        <div className="flex flex-col gap-y-[16px] lg:flex-row lg:gap-[24px] justify-between items-center">
+          <CustomInput label="Height" value={height} onChange={(e) => setHeight(parseInt(e.target.value, 10))} unit="cm" />
+          <CustomInput label="Weight" value={weight} onChange={(e) => setWeight(parseInt(e.target.value, 10))} unit="kg" />
+        </div>
+        :
+        <div className="flex flex-col gap-y-[16px] lg:gap-y-[24px]">
+          <div className="flex gap-[16px] lg:gap-[24px] justify-between items-center">
+            <CustomInput label="Height" value={feet} onChange={(e) => setFeet(parseInt(e.target.value, 10))} unit="ft" />
+            <CustomInput label="" value={inches} onChange={(e) => setInches(parseInt(e.target.value, 10))} unit="in" />
+          </div>
+          <div className="flex gap-[16px] lg:gap-[24px] justify-between items-center">
+            <CustomInput label="Weight" value={sts} onChange={(e) => setSts(parseInt(e.target.value, 10))} unit="st" />
+            <CustomInput label="" value={lbs} onChange={(e) => setLbs(parseInt(e.target.value, 10))} unit="lbs" />
+          </div>
+        </div>
+      }
+
+      <div className="calculator__result ">
         {result.bmi !== 0 ?
-          <div className="flex justify-between items-center gap-x-[24px]">
+          <div className="flex flex-col items-start lg:flex-row lg:justify-between lg:items-center gapy-y-[24px] lg:gap-x-[24px]">
             <div>
-              <p className="text-[16px] font-semibold">Your BMI is...</p>
-              <p className="text-[64px] title">{result.bmi}</p>
+              <p className="text-[16px] font-semibold mb-[8px] lg:m-0]">Your BMI is...</p>
+              <p className="text-[64px] title">{Number.isNaN(result.bmi)? '-' : result.bmi}</p>
             </div>
-            <p className="text-[14px] leading-150">Your BMI suggests you’re a {result.range}. Your ideal weight is between 63.3kgs - 85.2kgs.</p>
+            <p className="text-[14px] leading-150 text-start">Your BMI suggests you’re a {result.range}. Your ideal weight is between 63.3kgs - 85.2kgs.</p>
           </div>
           :
           <div className="flex flex-col gap-y-[24px] ">
