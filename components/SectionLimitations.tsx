@@ -3,7 +3,7 @@ import prefix from '@/utils/prefix';
 import Limitation from './Limitation';
 
 const SectionLimitations = () => (
-  <section className="sectionLimitations">
+  <section className="sectionLimitations" data-aos="fade-up">
     <div className='md:col-span-12 lg:col-start-1 lg:col-span-5'>
       <div className="w-full text-center lg:text-start">
         <h2 className="text-dark-blue title text-[32px] lg:text-[48px] mb-[32px] leading-110">Limitations of BMI</h2>
