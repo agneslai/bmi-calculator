@@ -23,11 +23,11 @@ const TIPS = [
 ];
 
 const SectionTips = () => (
-    <section className='sectionTips'>
+    <section className='sectionTips' data-aos="fade-up">
       <div className="sectionTips__overlay" />
 
       {TIPS.map((tip) => (
-        <div className='lg:col-span-4'>
+        <div className='lg:col-span-4' key={tip.title}>
           <Tip image={tip.image} imageAlt={tip.alt} title={tip.title} desc={tip.desc} />
         </div>
       ))}

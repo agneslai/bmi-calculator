@@ -1,41 +1,63 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { calculateUseImperial, calculateUseMetric, getRange } from '@/utils/BMICalculator';
+import { calculateUseImperial, calculateUseMetric, getClassification, getHealthyWeightRangeMetric, getHealthyWeightRangeImperial } from '@/utils/BMICalculator';
 import CustomInput from './CustomInput';
 import CustomRadio from './CustomRadio';
 
 interface IResult {
   bmi: number;
-  range: string;
+  classification: string;
+  weightRange: { lowerLimit: string, upperLimit: string }
 }
+
+const initialState = {
+  bmi: 0,
+  classification: '',
+  weightRange: { lowerLimit: '0', upperLimit: '0' }
+};
 
 const Calculator = () => {
   const [mode, setMode] = useState<'metric' | 'imperial' | string>('metric');
+  const [metric, setMetric] = useState<{ kg?: number, cm?: number }>();
+  const [imperial, setImperial] = useState<{ feet?: number, inches?: number, sts?: number, lbs?: number }>();
+  const [result, setResult] = useState<IResult>(initialState);
 
-  const [height, setHeight] = useState<number>(0);
-  const [weight, setWeight] = useState<number>(0);
-
-  const [feet, setFeet] = useState<number>(0);
-  const [inches, setInches] = useState<number>(0);
-  const [sts, setSts] = useState<number>(0);
-  const [lbs, setLbs] = useState<number>(0);
-
-  const [result, setResult] = useState<IResult>({ bmi: 0, range: 'Healthy weight' });
+  const handleChange = (key: string, newValue: string) => {
+    if (key === 'cm' || key === 'kg') {
+      setMetric((prevMetric) => ({
+        ...prevMetric,
+        [key]: newValue ? Number(newValue) : undefined
+      }));
+    } else {
+      setImperial((prevMetric) => ({
+        ...prevMetric,
+        [key]: newValue ? Number(newValue) : undefined
+      }));
+    }
+  };
 
   useEffect(() => {
     let bmi = 0;
-    if (mode === 'metric' && (weight !== 0 && height !== 0)) {
-      bmi = calculateUseMetric(weight, height);
-    } else if (mode === 'imperial' && (feet !== 0 && sts !== 0)) {
-      bmi = calculateUseImperial(sts, lbs, feet, inches);
+    let weightRange = { lowerLimit: '0', upperLimit: '0' };
+
+    if (mode === 'metric' && metric?.kg && metric?.cm) {
+      bmi = calculateUseMetric(metric.kg, metric.cm);
+      weightRange = getHealthyWeightRangeMetric(metric.cm);
+    } else if (mode === 'imperial' && (imperial?.feet && imperial.sts)) {
+      bmi = calculateUseImperial(imperial.feet, imperial.inches || 0, imperial.sts, imperial.lbs || 0);
+      weightRange = getHealthyWeightRangeImperial(imperial.feet, imperial.inches || 0);
     }
-    const range = getRange(bmi);
-    setResult({ bmi: parseFloat(bmi.toFixed(1)), range });
-  }, [weight, height, sts, lbs, feet, inches]);
+
+    const classification = getClassification(bmi);
+    setResult({ bmi: parseFloat(bmi.toFixed(1)), classification, weightRange });
+
+  }, [metric, imperial]);
 
   useEffect(() => {
-    setResult({ bmi: 0, range: 'Healthy weight' });
+    setResult(initialState);
+    setMetric(undefined);
+    setImperial(undefined);
   }, [mode]);
 
   return (
@@ -50,18 +72,18 @@ const Calculator = () => {
 
       {mode === 'metric' ?
         <div className="flex flex-col gap-y-[16px] md:flex-row md:gap-[24px] justify-between items-center">
-          <CustomInput label="Height" value={height} onChange={(e) => setHeight(parseInt(e.target.value, 10))} unit="cm" />
-          <CustomInput label="Weight" value={weight} onChange={(e) => setWeight(parseInt(e.target.value, 10))} unit="kg" />
+          <CustomInput label="Height" value={metric?.cm} onChange={(e) => handleChange('cm', e.target.value)} unit="cm" />
+          <CustomInput label="Weight" value={metric?.kg} onChange={(e) => handleChange('kg', e.target.value)} unit="kg" />
         </div>
         :
         <div className="flex flex-col gap-y-[16px] lg:gap-y-[24px]">
           <div className="flex gap-[16px] lg:gap-[24px] justify-between items-center">
-            <CustomInput label="Height" value={feet} onChange={(e) => setFeet(parseInt(e.target.value, 10))} unit="ft" />
-            <CustomInput label="" value={inches} onChange={(e) => setInches(parseInt(e.target.value, 10))} unit="in" />
+            <CustomInput label="Height" value={imperial?.feet} onChange={(e) => handleChange('feet', e.target.value)} unit="ft" />
+            <CustomInput label="" value={imperial?.inches} onChange={(e) => handleChange('inches', e.target.value)} unit="in" />
           </div>
           <div className="flex gap-[16px] lg:gap-[24px] justify-between items-center">
-            <CustomInput label="Weight" value={sts} onChange={(e) => setSts(parseInt(e.target.value, 10))} unit="st" />
-            <CustomInput label="" value={lbs} onChange={(e) => setLbs(parseInt(e.target.value, 10))} unit="lbs" />
+            <CustomInput label="Weight" value={imperial?.sts} onChange={(e) => handleChange('sts', e.target.value)} unit="st" />
+            <CustomInput label="" value={imperial?.lbs} onChange={(e) => handleChange('lbs', e.target.value)} unit="lbs" />
           </div>
         </div>
       }
@@ -71,9 +93,11 @@ const Calculator = () => {
           <div className="flex flex-col items-start md:flex-row md:justify-between md:items-center gap-y-[24px] md:gap-x-[24px]">
             <div>
               <p className="text-[16px] font-semibold mb-[8px] md:m-0]">Your BMI is...</p>
-              <p className="text-[64px] font-semibold leading-110 -tracking-5">{Number.isNaN(result.bmi)? '-' : result.bmi}</p>
+              <p className="text-[64px] font-semibold leading-110 -tracking-5">{Number.isNaN(result.bmi) ? '-' : result.bmi}</p>
             </div>
-            <p className="text-[14px] leading-150 text-start">Your BMI suggests you’re a {result.range}. Your ideal weight is between 63.3kgs - 85.2kgs.</p>
+            <p className="text-[14px] leading-150 text-start">
+              Your BMI suggests you’re {result.classification}. Your ideal weight is between {result.weightRange.lowerLimit}kgs - {result.weightRange.upperLimit}kgs.
+            </p>
           </div>
           :
           <div className="flex flex-col gap-y-[24px] ">
