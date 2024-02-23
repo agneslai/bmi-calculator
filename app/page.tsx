@@ -13,7 +13,6 @@ import SectionTips from '@/components/SectionTips';
 const Home = () => {
   useEffect(() => {
     AOS.init({
-      disable: true,
       offset: 10,
       easing: 'ease-out-back',
       duration: 800,
