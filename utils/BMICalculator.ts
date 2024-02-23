@@ -9,10 +9,10 @@ const calculateUseMetric = (weight: number, height: number) =>
   weight / (((height / 100) * height) / 100);
 
 const calculateUseImperial = (
-  sts: number,
-  lbs: number,
   feet: number,
   inches: number,
+  sts: number,
+  lbs: number,
 ) => {
   const totalInches = feet * 12 + inches;
   const totalLbs = sts * 14 + lbs;

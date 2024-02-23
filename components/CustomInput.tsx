@@ -2,7 +2,7 @@ import { ChangeEventHandler } from 'react';
 
 interface Props {
   label?: string;
-  value: number;
+  value?: number;
   unit: string;
   onChange: ChangeEventHandler<HTMLInputElement>;
 }
@@ -16,8 +16,9 @@ const CustomInput = ({ label, value, unit, onChange }: Props) => (
         type="number"
         value={value}
         onChange={onChange}
-        className={`w-full outline-none text-[24px] font-semibol ${value === 0 ? 'text-grey' : 'text-dark-blue'}`}
+        placeholder='0'
         min={0}
+        className="w-full outline-none text-[24px] font-semibol placeholder-gray-300 text-dark-blue"
       />
       <p className='text-blue font-semiBold text-[24px] -tracking-5'>{unit}</p>
     </div>
