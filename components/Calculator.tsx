@@ -1,14 +1,21 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { calculateUseImperial, calculateUseMetric, getRange } from '@/utils/BMICalculator';
+import { calculateUseImperial, calculateUseMetric, getClassification, getHealthyWeightRangeMetric, getHealthyWeightRangeImperial } from '@/utils/BMICalculator';
 import CustomInput from './CustomInput';
 import CustomRadio from './CustomRadio';
 
 interface IResult {
   bmi: number;
-  range: string;
+  classification: string;
+  weightRange: { lowerLimit: string, upperLimit: string }
 }
+
+const initialState = {
+  bmi: 0,
+  classification: '',
+  weightRange: { lowerLimit: '0', upperLimit: '0' }
+};
 
 const Calculator = () => {
   const [mode, setMode] = useState<'metric' | 'imperial' | string>('metric');
@@ -21,21 +28,27 @@ const Calculator = () => {
   const [sts, setSts] = useState<number>(0);
   const [lbs, setLbs] = useState<number>(0);
 
-  const [result, setResult] = useState<IResult>({ bmi: 0, range: 'Healthy weight' });
+  const [result, setResult] = useState<IResult>(initialState);
 
   useEffect(() => {
     let bmi = 0;
+    let weightRange = { lowerLimit: '0', upperLimit: '0' };
+
     if (mode === 'metric' && (weight !== 0 && height !== 0)) {
       bmi = calculateUseMetric(weight, height);
+      weightRange = getHealthyWeightRangeMetric(height);
     } else if (mode === 'imperial' && (feet !== 0 && sts !== 0)) {
       bmi = calculateUseImperial(sts, lbs, feet, inches);
+      weightRange = getHealthyWeightRangeImperial(feet, inches);
     }
-    const range = getRange(bmi);
-    setResult({ bmi: parseFloat(bmi.toFixed(1)), range });
+
+    const classification = getClassification(bmi);
+    setResult({ bmi: parseFloat(bmi.toFixed(1)), classification, weightRange });
+
   }, [weight, height, sts, lbs, feet, inches]);
 
   useEffect(() => {
-    setResult({ bmi: 0, range: 'Healthy weight' });
+    setResult(initialState);
   }, [mode]);
 
   return (
@@ -71,9 +84,11 @@ const Calculator = () => {
           <div className="flex flex-col items-start md:flex-row md:justify-between md:items-center gap-y-[24px] md:gap-x-[24px]">
             <div>
               <p className="text-[16px] font-semibold mb-[8px] md:m-0]">Your BMI is...</p>
-              <p className="text-[64px] font-semibold leading-110 -tracking-5">{Number.isNaN(result.bmi)? '-' : result.bmi}</p>
+              <p className="text-[64px] font-semibold leading-110 -tracking-5">{Number.isNaN(result.bmi) ? '-' : result.bmi}</p>
             </div>
-            <p className="text-[14px] leading-150 text-start">Your BMI suggests you’re a {result.range}. Your ideal weight is between 63.3kgs - 85.2kgs.</p>
+            <p className="text-[14px] leading-150 text-start">
+              Your BMI suggests you’re {result.classification}. Your ideal weight is between {result.weightRange.lowerLimit}kgs - {result.weightRange.upperLimit}kgs.
+            </p>
           </div>
           :
           <div className="flex flex-col gap-y-[24px] ">
